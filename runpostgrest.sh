@@ -6,5 +6,5 @@ while [ "$OUTPUT" = 0 ]; do
   sleep 1
 done
 echo "PostgreSQL is running!"
-$*
+postgrest $DB_URL -a $DB_USER
 
