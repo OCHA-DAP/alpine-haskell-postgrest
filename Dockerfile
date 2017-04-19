@@ -3,7 +3,7 @@ FROM unocha/alpine-base:latest
 MAINTAINER Michael Rans <rans@email.com>
 
 RUN echo "https://s3-us-west-2.amazonaws.com/alpine-ghc/7.10" >> /etc/apk/repositories && \
-    curl -so runpostgrest.sh \
+    curl -so /root/runpostgrest.sh \
         https://raw.githubusercontent.com/OCHA-DAP/alpine-haskell-postgrest/master/runpostgrest.sh && \
     curl -so /etc/apk/keys/mitch.tishmack@gmail.com-55881c97.rsa.pub \
         https://raw.githubusercontent.com/mitchty/alpine-ghc/master/mitch.tishmack%40gmail.com-55881c97.rsa.pub && \
