@@ -2,20 +2,20 @@ FROM unocha/alpine-base:latest
 
 MAINTAINER Michael Rans <rans@email.com>
 
-RUN echo "https://s3-us-west-2.amazonaws.com/alpine-ghc/7.10" >> /etc/apk/repositories && \
+RUN echo "https://s3-us-west-2.amazonaws.com/alpine-ghc/8.0" >> /etc/apk/repositories && \ 
     curl -so /root/runpostgrest.sh \
         https://raw.githubusercontent.com/OCHA-DAP/alpine-haskell-postgrest/master/runpostgrest.sh && \
     curl -so /etc/apk/keys/mitch.tishmack@gmail.com-55881c97.rsa.pub \
         https://raw.githubusercontent.com/mitchty/alpine-ghc/master/mitch.tishmack%40gmail.com-55881c97.rsa.pub && \
-    apk add --no-cache --update build-base git xz postgresql-dev ghc stack && \
-    git clone https://github.com/begriffs/postgrest.git --single-branch && \
-    cd postgrest && \
-    git checkout 726b2b9d18a3b8217d83c514122560fd5f71af95 && \
+    apk add --no-cache --update build-base xz postgresql-dev zlib-dev ghc stack && \
+    curl -L https://github.com/begriffs/postgrest/tarball/v0.5.0.0 \
+        | tar xz -C /root && \
+    cd /root/PostgREST* && \
+    stack config set system-ghc --global true && \
     stack build --copy-bins --local-bin-path /usr/local/bin && \
     stack clean --full && \
-    cd .. && \
-    rm -rf postgrest && \
-    apk del build-base git xz postgresql-dev ghc stack && \
+    rm -rf /root/PostgREST* && \
+    apk del build-base xz postgresql-dev zlib-dev ghc stack && \
     apk add --no-cache libpq gmp && \
     rm -r /root/.stack && \
     rm -rf /var/lib/apk/*
