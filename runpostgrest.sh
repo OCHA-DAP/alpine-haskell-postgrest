@@ -7,7 +7,7 @@ while [ "$OUTPUT" = 0 ]; do
 done
 echo "PostgreSQL is running!"
 echo "db-uri = \"$DB_URL\"" > /root/postgrest.conf
-echo "db-schema = \"$DB_USER\"" >> /root/postgrest.conf
+echo "db-schema = \"public\"" >> /root/postgrest.conf
 echo "db-anon-role = \"$DB_USER\"" >> /root/postgrest.conf
 
 postgrest /root/postgrest.conf
