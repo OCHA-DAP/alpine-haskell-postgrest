@@ -21,4 +21,4 @@ RUN echo "https://s3-us-west-2.amazonaws.com/alpine-ghc/8.0" >> /etc/apk/reposit
     rm -r /root/.stack && \
     rm -rf /var/lib/apk/*
 
-CMD ["postgrest", "$DB_URL", "-a", "freshness"]
+CMD ["sh", "/root/runpostgrest.sh"]
