@@ -6,5 +6,9 @@ while [ "$OUTPUT" = 0 ]; do
   sleep 1
 done
 echo "PostgreSQL is running!"
-postgrest $DB_URL -a $DB_USER
+echo "db-uri = \"$DB_URL\"" > /root/postgrest.conf
+echo "db-schema = \"$DB_USER\"" >> /root/postgrest.conf
+echo "db-anon-role = \"anon\"" >> /root/postgrest.conf
+
+postgrest /root/postgrest.conf
 
