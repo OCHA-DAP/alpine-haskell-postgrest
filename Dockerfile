@@ -1,4 +1,4 @@
-FROM unocha/alpine-base:latest
+FROM unocha/alpine-base:3.7
 
 MAINTAINER Michael Rans <rans@email.com>
 
